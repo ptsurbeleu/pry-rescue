@@ -72,21 +72,3 @@ Pry::Commands.create_command "try-again", "Re-try the code that caused this exce
     throw :try_again
   end
 end
-
-Pry::Commands.create_command "restart", "Restarts the debugged program" do
-    
-    banner <<-BANNER
-    Usage: restart
-    
-    This is a re-exec - all pry state is lost. If command arguments are
-    passed those are used.
-    
-    NOTE: This command is similar to byebug's restart command
-        BANNER
-        
-    def process
-        argv = [ENV["_"], "rspec"]
-        argv += ARGV
-        exec(*argv)
-    end
-end

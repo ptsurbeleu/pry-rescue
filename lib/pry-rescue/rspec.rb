@@ -10,8 +10,19 @@ class PryRescue
     def self.run(example)
       Pry::rescue do
         begin
+          # This is a re-exec - all pry state is lost.
+          #
+          # NOTE: This block is a carbon-copy of byebug's restart command
+          if example.executed?
+            # It seems our example has failed, thus re-exec everything
+            # because the example is a proc that I don't know how to re-evaluate
+            # to pickup the latest changes to the source code.
+            argv = [ENV["_"], "rspec"]
+            argv += ARGV
+            exec(*argv)
+          end
+          
           before
-
           example.binding.eval('@exception = nil; @example && @example.instance_variable_set(:@exception, nil)')
           example.binding.eval('example.instance_variable_set(:@exception, nil) if defined?(example)')
           if example.example_group_instance.respond_to?(:__init_memoized, true)

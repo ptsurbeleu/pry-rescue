@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'pry-rescue'
-  s.version       = '1.4.3.2'
+  s.version       = '1.4.4'
   s.summary       = 'Open a pry session on any unhandled exceptions'
   s.description   = 'Allows you to wrap code in Pry::rescue{ } to open a pry session at any unhandled exceptions'
   s.homepage      = 'https://github.com/ConradIrwin/pry-rescue'
@@ -12,7 +12,6 @@ Gem::Specification.new do |s|
   s.executables   = s.files.grep(%r{^bin/}).map{|f| File.basename f}
 
   s.add_dependency 'pry'
-  s.add_dependency 'pry-byebug'
   s.add_dependency 'interception', '>= 0.5'
 
   s.add_development_dependency 'pry-stack_explorer' # upgrade to regular dep?
